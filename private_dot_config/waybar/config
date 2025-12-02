@@ -128,7 +128,6 @@
   "battery": {
     "bat": "BAT0",
     "states": {
-      // "good": 95,
       "warning": 45,
       "critical": 35
     },
@@ -149,7 +148,6 @@
   "battery#bat1": {
     "bat": "BAT1",
     "states": {
-      // "good": 95,
       "warning": 30,
       "critical": 15
     },
@@ -222,7 +220,6 @@
   "niri/window": {
     "tooltip": false,
     "format": "{}",
-    // "format": "<span font_size='12000'>{}</span>", // rewrite not working with this idk why
     "rewrite": {
       "(.*) — Mozilla Firefox": "$1",
       "(.*) — Ablaze Floorp": "$1",
