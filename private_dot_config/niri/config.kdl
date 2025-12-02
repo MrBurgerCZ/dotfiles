@@ -33,6 +33,18 @@ input {
         // disabled-on-external-mouse
     }
 
+    trackpoint {
+        // off
+        // natural-scroll
+        accel-speed 0.2
+        accel-profile "flat"
+        // scroll-method "on-button-down"
+        // scroll-button 273
+        // scroll-button-lock
+        // left-handed
+        // middle-emulation
+    }
+
     mouse {
         // off
         // natural-scroll
