@@ -1,0 +1,513 @@
+{
+  "layer": "top", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  // "width": 1280, // Waybar width
+  // Choose the order of the modules
+  "modules-left": [
+    "group/temp",
+    "cpu",
+    "memory",
+    "battery",
+    "battery#bat1",
+    "power-profiles-daemon"
+    // "group/phone",
+    // "custom/right-end"
+    // "custom/music"
+  ],
+  "modules-center": [
+    "niri/window"
+  ],
+  "modules-right": [
+    "custom/privacydots",
+    "tray",
+    "keyboard-state",
+    "niri/language",
+    // "pulseaudio/slider",
+    // "backlight/slider",
+    "group/quickapps",
+    "backlight",
+    "network",
+    "group/boot"
+  ],
+  //     "custom/notification",
+  //     "keyboard-state",
+  //     "custom/power"
+  // ],
+  // "wlr/workspaces": {
+  //   "disable-scroll": true,
+  //   "sort-by-name": true,
+  //   "format": " {icon} ",
+  //   "format-icons": {
+  //     "default": ""
+  //   }
+  // },
+  "custom/right-end": {
+    "tooltip": false,
+    "format": "  "
+  },
+  "custom/left-end": {
+    "tooltip": false,
+    "format": "  "
+  },
+  "group/temp": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 250,
+      "children-class": "temp",
+      "transition-left-to-right": true,
+    },
+    "modules": [
+      "temperature",
+      "custom/fan",
+      "custom/fan_up",
+      "custom/fan_down"
+    ]
+  },
+  "temperature": {
+    "interval": 2,
+    // "thermal-zone": 2,
+    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "tooltip": false,
+    "critical-threshold": 80,
+    // "format-critical": "{temperatureC}°C {icon}",
+    "on-click": "kitty btop",
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "custom/fan": {
+    "exec": "~/scripts/fan_speed.sh show",
+    "interval": 1,
+    "tooltip": false,
+    "format": "󰈐 {}",
+    "on-click": "~/scripts/fan_speed.sh auto",
+    "on-click-right": "~/scripts/fan_speed.sh emergency",
+    "on-scroll-up": "~/scripts/fan_speed.sh up",
+    "on-scroll-down": "~/scripts/fan_speed.sh down"
+  },
+  "custom/fan_up": {
+    "tooltip": false,
+    "format": "+",
+    "on-click": "~/scripts/fan_speed.sh up"
+  },
+  "custom/fan_down": {
+    "tooltip": false,
+    "format": "-",
+    "on-click": "~/scripts/fan_speed.sh down"
+  },
+  "cpu": {
+    "interval": 1,
+    "format": " {usage}%",
+    "format-alt": " {avg_frequency} GHz",
+    "critical-threshold": 80,
+    "states": {
+      "critical": 90,
+      "high": 70,
+      "medium": 60,
+      "low": 0
+    }
+  },
+  "memory": {
+    "interval": 2,
+    "format": " {}%",
+    "format-alt": " {swapPercentage}%",
+    "tooltip-format": "{used}GiB used of {total}GiB\nSwap: {swapUsed}GiB used of {swapTotal}GiB",
+    "states": {
+      "critical": 90,
+      "high": 70,
+      "medium": 5,
+      "low": 0
+    }
+  },
+  "battery": {
+    "bat": "BAT0",
+    "states": {
+      // "good": 95,
+      "warning": 45,
+      "critical": 35
+    },
+    "tooltip-format": "Internal battery",
+    "format": "{icon} {capacity}%",
+    "format-full": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": "  capacity}%",
+    "format-alt": "{icon} {time}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "battery#bat1": {
+    "bat": "BAT1",
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "tooltip-format": "External battery",
+    "format": "{icon} {capacity}%",
+    "format-full": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{icon} {time}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": false,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
+  },
+  "group/phone": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 250,
+      "children-class": "temp",
+      "transition-left-to-right": true
+    },
+    "modules": [
+      "custom/phone_battery",
+      "custom/phone_network"
+    ]
+  },
+  "custom/phone_battery": {
+    "exec": "~/scripts/hass.sh battery",
+    "return-type": "json",
+    "interval": 600
+  },
+  "custom/phone_network": {
+    "exec": "~/scripts/hass.sh network",
+    "return-type": "json",
+    "interval": 600
+  },
+  "custom/music": {
+    "format": "<span font_size='12000'> {}</span>",
+    "escape": true,
+    "interval": 5,
+    "tooltip": false,
+    "exec": "playerctl metadata --format='{{ title }}' | sed 's/\\(.*\\) - .*/\\1/'",
+    "on-click": "playerctl play-pause",
+    "max-length": 50,
+    "on-scroll-up": "playerctl previous",
+    "on-scroll-down": "playerctl next"
+  },
+  // "wlr/taskbar": {
+  //   "format": "{icon}",
+  //   "icon-size": 12,
+  //   "icon-theme": "Numix-Circle",
+  //   "tooltip-format": "{title}",
+  //   "on-click": "activate",
+  //   "on-click-middle": "close"
+  // },
+  "niri/window": {
+    "tooltip": false,
+    "format": "{}",
+    // "format": "<span font_size='12000'>{}</span>", // rewrite not working with this idk why
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "$1",
+      "(.*) — Ablaze Floorp": "$1",
+      "(.*) — Ablaze Floorp Private Browsing": "$1 — 󰗹",
+      "(.*) — Zen Browser": "$1",
+      "(.*) — Zen Browser Private Browsing": "$1 — 󰗹",
+      "(.*) - Visual Studio Code": "$1",
+      "Yazi: (.*)": "$1"
+    },
+    "on-scroll-up": "niri msg action focus-column-left",
+    "on-scroll-down": "niri msg action focus-column-right",
+    "on-click-middle": "niri msg action close-window"
+  },
+  "custom/privacydots": {
+    "exec": "~/scripts/privacy_dots.sh",
+    "return-type": "json",
+    "interval": 3,
+    "format": "{text}",
+    "tooltip": true,
+    "escape": false,
+    "markup": "pango"
+  },
+  "group/quickapps": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 250,
+      "children-class": "quickapps",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "pulseaudio", // First element is the "group leader" and won't ever be hidden
+      "custom/collector",
+      // "custom/text-pieces",
+      "custom/dialect",
+      "custom/characters",
+      "custom/frog",
+      "custom/eyedropper",
+      "custom/nwg-drawer"
+    ]
+  },
+  "custom/nwg-drawer": {
+    "tooltip": true,
+    "tooltip-format": "open nwg-drawer",
+    "format": "󰀻",
+    "on-click": "nwg-drawer -ovl",
+    "escape": true
+  },
+  "custom/collector": {
+    "tooltip": true,
+    "tooltip-format": "open Collector",
+    "format": "󰇀",
+    "on-click": "flatpak run it.mijorus.collector",
+    "on-click-middle": "flatpak kill it.mijorus.collector",
+    "escape": true
+  },
+  "custom/text-pieces": {
+    "tooltip": true,
+    "tooltip-format": "open Text Pieces",
+    "format": "",
+    "on-click": "flatpak run io.gitlab.liferooter.TextPieces",
+    "on-click-middle": "flatpak kill io.gitlab.liferooter.TextPieces",
+    "escape": true
+  },
+  "custom/dialect": {
+    "tooltip": true,
+    "tooltip-format": "open Dialect",
+    "format": "󰗊",
+    "on-click": "flatpak run app.drey.Dialect",
+    "on-click-middle": "flatpak kill app.drey.Dialect",
+    "escape": true
+  },
+  "custom/characters": {
+    "tooltip": true,
+    "tooltip-format": "open Characters",
+    "format": "󱔁",
+    "on-click": "flatpak run org.gnome.Characters",
+    "on-click-middle": "flatpak kill org.gnome.Characters",
+    "escape": true
+  },
+  "custom/frog": {
+    "tooltip": true,
+    "tooltip-format": "open Frog",
+    "format": "",
+    "on-click": "flatpak run com.github.tenderowl.frog",
+    "on-click-middle": "flatpak kill com.github.tenderowl.frog",
+    "escape": true
+  },
+  "custom/eyedropper": {
+    "tooltip": true,
+    "tooltip-format": "color picker\nright click to launch Eyedropper",
+    "format": "󰈊",
+    "on-click": "hyprpicker | wl-copy",
+    "on-click-right": "flatpak run com.github.finefindus.eyedropper",
+    "on-click-middle": "flatpak kill com.github.finefindus.eyedropper",
+    "escape": true
+  },
+  "tray": {
+    "icon-size": 18,
+    "spacing": 10
+  },
+  "niri/language": {
+    "format": "{short}"
+    // "format-us": "EN"
+    // "format-cs": "CZ"
+  },
+  "keyboard-state": {
+    "capslock": true,
+    "format": "{icon}",
+    "format-icons": {
+      "locked": "",
+      "unlocked": ""
+    }
+  },
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
+  },
+  "backlight/slider": {
+    "min": 1,
+    "max": 100,
+    "orientation": "horizontal",
+    "device": "intel_backlight"
+  },
+  "pulseaudio": {
+    "reverse-scrolling": true,
+    //"reverse-mouse-scrolling": true,
+    // "scroll-step": 1, // %, can be a float
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol",
+    "on-click-middle": "wpctl set-mute @DEFAULT_SINK@ toggle"
+  },
+  "backlight": {
+    "tooltip": false,
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "reverse-scrolling": true,
+    //"reverse-mouse-scrolling": true,
+    "on-scroll-up": "brightnessctl s 1%+",
+    "on-scroll-down": "brightnessctl s 1%-",
+    "on-click-right": "sudo brillo -u 500000 -S 100",
+    "on-click-middle": "sudo brillo -u 500000 -S 1"
+  },
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": " {essid} ({signalStrength}%)",
+    "format-ethernet": " {ifname}",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "⚠ Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-click-middle": "nmcli radio wifi | grep -q enabled && nmcli radio wifi off || nmcli radio wifi on",
+    "on-click-right": "kitty nmtui"
+  },
+  "group/boot": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 250,
+      "children-class": "boot",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "clock", // First element is the "group leader" and won't ever be hidden
+      "custom/right-end",
+      "custom/bootwindows",
+      "custom/bootmacos",
+      "custom/sleep",
+      "custom/reboot",
+      "custom/shutdown",
+      "custom/left-end"
+    ]
+  },
+  "clock": {
+    "timezone": "Europe/Prague",
+    // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "tooltip": false,
+    "format-alt": "{:%d/%m/%Y}",
+    "format": "{:%H:%M}",
+    "on-click-middle": "sh $HOME/.config/rofi/bin/powermenu &",
+    "on-click-right": "swaync-client -t -sw"
+  },
+  "custom/lid-led": {
+    "tooltip": false,
+    "format": "󰤄",
+    "on-click": "sh $HOME/scripts/lidLed.sh",
+    "escape": true
+  },
+  "custom/power-led": {
+    "tooltip": false,
+    "format": "󰤄",
+    "on-click": "sh $HOME/scripts/powerLed.sh",
+    "escape": true
+  },
+  "custom/bootwindows": {
+    "tooltip": false,
+    "format": "",
+    "on-click": "kitty sh $HOME/scripts/bootWindows.sh",
+    "escape": true
+  },
+  "custom/bootmacos": {
+    "tooltip": false,
+    "format": "",
+    "on-click": "kitty sh $HOME/scripts/bootMacOS.sh",
+    "escape": true
+  },
+  "custom/sleep": {
+    "tooltip": false,
+    "format": "󰤄",
+    "on-click": "sh systemctl suspend &",
+    "escape": true
+  },
+  "custom/reboot": {
+    "tooltip": false,
+    "format": "󰜉",
+    "on-click": "sh reboot",
+    "escape": true
+  },
+  "custom/shutdown": {
+    "tooltip": false,
+    "format": "",
+    "on-click": "sh shutdown -h now",
+    "escape": true
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󰂞",
+      "none": "",
+      "dnd-notification": "<span foreground='#f38ba8'>󰂞</span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='#f38ba8'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  // "keyboard-state": {
+  //   //"device-path": "/dev/input/event3",
+  //   "tooltip": false,
+  //   "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown",
+  //   "numlock": false,
+  //   "capslock": true,
+  //   "format": "{icon}",
+  //   "format-icons": {
+  //     "locked": "",
+  //     "unlocked": ""
+  //   }
+  // },
+  "custom/lock": {
+    "tooltip": false,
+    "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown",
+    "format": ""
+  },
+  "custom/power": {
+    "tooltip": false,
+    "on-click": "sh $HOME/.config/rofi/bin/powermenu &",
+    "format": "⏼"
+  }
+}

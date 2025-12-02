@@ -1,0 +1,368 @@
+@import "./gruvbox-material.css";
+
+* {
+  font-family: FantasqueSansM Nerd Font Propo;
+  font-size: 17px;
+  min-height: 0;
+}
+
+#waybar {
+  background: transparent;
+  color: @fg0;
+  margin: 5px 5px;
+}
+
+
+#custom-right-end,
+#custom-left-end,
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#mpd,
+#temperature,
+#custom-fan,
+#custom-fan_up,
+#custom-fan_down,
+#backlight,
+#network,
+#pulseaudio-slider,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#custom-privacydots,
+#tray,
+#custom-phone_battery,
+#custom-phone_network,
+#taskbar,
+#window,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#keyboard-state,
+#bluetooth,
+#language,
+#custom-notification,
+#custom-music,
+#custom-lock,
+#custom-power {
+  background-color: @bg_dim;
+  padding: 0.5rem .8rem;
+  margin: 5px 0;
+}
+
+#custom-right-end {
+  border-radius: 0px 12px 12px 0px;
+  margin-right: 1rem;
+  margin-left: -2px;
+  padding: 0;
+}
+
+#custom-left-end {
+  border-radius: 12px 0px 0px 12px;
+  margin-left: 1rem;
+  margin-right: -2px;
+  padding: 0;
+}
+
+#temperature {
+  color: @red;
+  border-radius: 12px 0px 0px 12px;
+  margin-left: 1rem;
+}
+
+#temperature.high {
+  color: @bg_dim;
+  background-color: @orange;
+}
+
+#temperature.critical {
+  color: @bg_dim;
+  background-color: @red;
+}
+
+#cpu {
+  color: @orange;
+}
+
+#cpu.medium {
+  color: @yellow;
+}
+
+#cpu.high {
+  color: @bg_dim;
+  background-color: @yellow;
+}
+
+#cpu.critical {
+  color: @bg_dim;
+  background-color: @red;
+}
+
+#memory {
+  color: @yellow;
+}
+
+#memory.high {
+  color: @bg_dim;
+  background-color: @yellow;
+}
+
+#memory.critical {
+  color: @bg_dim;
+  background-color: @red;
+}
+
+#battery {
+  color: @green;
+  border-radius: 0;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @orange;
+  background-color: @bg_visual_red;
+}
+
+#battery.critical:not(.charging) {
+  color: @bg_dim;
+  background-color: @red;
+}
+
+#power-profiles-daemon {
+  color: @purple;
+  border-radius: 0px 12px 12px 0px;
+}
+
+#power-profiles-daemon.performance {
+  color: @red;
+  background-color: @bg_diff_red;
+}
+
+#power-profiles-daemon.balanced {
+  color: @orange;
+}
+
+#power-profiles-daemon.power-saver {
+  color: @aqua;
+}
+
+#custom-phone_battery {
+  padding-left: 1rem;
+  padding-right: 0;
+  margin-left: 1rem;
+  border-radius: 12px 0 0 12px;
+}
+
+#custom-phone_battery.charging {
+  color: @green;
+}
+
+#custom-phone_battery.warning {
+  color: @orange;
+  background-color: @bg_visual_red;
+}
+
+#custom-phone_battery.critical {
+  color: @bg_dim;
+  background-color: @red;
+}
+
+#custom-phone_network {
+  padding-left: 0.7rem;
+  padding-right: 0;
+}
+
+#window {
+  background-color: transparent;
+  color: @bg_dim;
+  border-radius: 12px;  
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+#custom-music {
+  border-radius: 12px;
+  margin-left: 1rem;
+}
+
+#mpd{
+  border-radius: 1rem;
+  margin-left: 1rem;
+}
+
+#custom-nwg-drawer,
+#custom-collector,
+#custom-text-pieces,
+#custom-dialect,
+#custom-characters,
+#custom-frog,
+#custom-eyedropper {
+  background-color: @bg_dim;
+  padding: 0.5rem 5px;
+  margin: 5px 0;
+}
+
+#custom-collector {
+  border-radius: 12px 0px 0px 12px;
+  padding-left: 12px;
+}
+
+#custom-nwg-drawer {
+  padding-right: 12px;
+  border-radius: 0px 12px 12px 0px;
+  margin-right: 1rem;
+}
+
+#custom-privacydots {
+  border-radius: 12px;
+  margin-right: 1rem;
+}
+
+#tray {
+  border-radius: 12px 0px 0px 12px;
+}
+
+#keyboard-state {
+  padding: 0px;
+}
+
+#keyboard-state label.capslock.locked {
+  color: @red;
+  padding-right: 1rem;
+}
+
+#language {
+  margin-right: 1rem;
+  border-radius: 0px 12px 12px 0px;
+  padding-left: 0;
+}
+
+#pulseaudio-slider {
+  border-radius: 12px;
+  padding: 0px 1rem;
+  margin-right: 1rem;
+}
+
+#pulseaudio-slider slider {
+  min-height: 0px;
+  min-width: 0px;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+  min-height: 10px;
+  min-width: 100px;
+  border-radius: 5px;
+  background-color: @crust;
+}
+
+#pulseaudio-slider highlight {
+  min-width: 0px;
+  border-radius: 5px;
+  background-color: @green;
+}
+
+#pulseaudio {
+  color: @red;
+  border-radius: 12px 0px 0px 12px;
+}
+
+#backlight-slider slider {
+  min-height: 0px;
+  min-width: 0px;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+#backlight-slider trough {
+  min-height: 10px;
+  min-width: 100px;
+  border-radius: 5px;
+  background-color: black;
+}
+#backlight-slider highlight {
+  min-width: 1px;
+  border-radius: 5px;
+  background-color: red;
+}
+
+#backlight {
+  color: @yellow;
+  border-radius: 0;
+}
+
+#network {
+  color: @aqua;
+}
+
+#network.disconnected {
+  color: @red;
+}
+
+#clock {
+  color: @blue;
+  border-radius: 0px 12px 12px 0px;
+  margin-right: 1rem;
+}
+
+
+#custom-sleep,
+#custom-reboot,
+#custom-shutdown,
+#custom-bootwindows,
+#custom-bootmacos {
+  background-color: @bg_dim;
+  padding: 0.5rem 5px;
+  margin: 5px 0;
+}
+
+#custom-bootwindows {
+  color: @blue;
+  padding-left: 10px;
+  border-radius: 12px 0px 0px 12px;
+}
+
+#custom-bootmacos {
+  background-color: @bg_dim;
+}
+
+#custom-sleep {
+  color: @purple;
+}
+
+#custom-reboot {
+  color: @green;
+}
+
+#custom-shutdown {
+  color: @red;
+  border-radius: 0px 12px 12px 0px;
+  padding-right: 8px;
+}
+
+#custom-notification {
+  border-radius: 12px 0px 0px 12px;
+  margin-right: -10px;
+  color: @blue;
+}
+
+#custom-lock {
+    color: @purple;
+    margin-right: -10px;
+}
+
+#custom-power {
+    margin-right: 1rem;
+    border-radius: 0px 12px 12px 0px;
+    color: @red;
+}
