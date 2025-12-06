@@ -404,6 +404,9 @@ binds {
     XF86AudioRaiseVolume   allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
     XF86AudioLowerVolume   allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
     XF86AudioMute          allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
+    Alt+XF86AudioRaiseVolume   allow-when-locked=true { spawn-sh "~/scripts/fan_speed.sh up"; }
+    Alt+XF86AudioLowerVolume   allow-when-locked=true { spawn-sh "~/scripts/fan_speed.sh down"; }
+    Alt+XF86AudioMute          allow-when-locked=true { spawn-sh "~/scripts/fan_speed.sh auto"; }
     XF86AudioMicMute       allow-when-locked=true { spawn "swayosd-client" "--input-volume" "mute-toggle"; }
     XF86MonBrightnessUp    allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2"; }
     XF86MonBrightnessDown  allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "2"; }
