@@ -401,19 +401,19 @@ binds {
     Mod+A { spawn "bash" "-c" "~/scripts/toggle_caps_esc_swap.sh"; }
 
     // Function row
-    XF86AudioRaiseVolume   allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
-    XF86AudioLowerVolume   allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
-    XF86AudioMute          allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
-    Alt+XF86AudioRaiseVolume   allow-when-locked=true { spawn-sh "~/scripts/fan_speed.sh up"; }
-    Alt+XF86AudioLowerVolume   allow-when-locked=true { spawn-sh "~/scripts/fan_speed.sh down"; }
-    Alt+XF86AudioMute          allow-when-locked=true { spawn-sh "~/scripts/fan_speed.sh auto"; }
-    XF86AudioMicMute       allow-when-locked=true { spawn "swayosd-client" "--input-volume" "mute-toggle"; }
-    XF86MonBrightnessUp    allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2"; }
-    XF86MonBrightnessDown  allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "2"; }
-    Alt+XF86MonBrightnessUp    allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2" "-q"; }
-    Alt+XF86MonBrightnessDown  allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "2" "-q"; }
-    Shift+XF86MonBrightnessUp    allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "10"; }
-    Shift+XF86MonBrightnessDown  allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "10"; }
+    XF86AudioRaiseVolume        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
+    XF86AudioLowerVolume        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
+    XF86AudioMute               allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
+    Ctrl+XF86AudioRaiseVolume   { spawn-sh "bash ~/scripts/fan_speed.sh up"; }
+    Ctrl+XF86AudioLowerVolume   { spawn-sh "bash ~/scripts/fan_speed.sh down"; }
+    Ctrl+XF86AudioMute          { spawn-sh "bash ~/scripts/fan_speed.sh auto"; }
+    XF86AudioMicMute            allow-when-locked=true { spawn "swayosd-client" "--input-volume" "mute-toggle"; }
+    XF86MonBrightnessUp         allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2"; }
+    XF86MonBrightnessDown       allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "2"; }
+    Alt+XF86MonBrightnessUp     allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2" "-q"; }
+    Alt+XF86MonBrightnessDown   allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "2" "-q"; }
+    Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "10"; }
+    Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "10"; }
     Ctrl+XF86MonBrightnessUp    allow-when-locked=true { spawn "sudo" "brillo" "-u" "300000" "-S" "100"; }
     Ctrl+XF86MonBrightnessDown  allow-when-locked=true { spawn "sudo" "brillo" "-u" "300000" "-S" "0"; }
 
