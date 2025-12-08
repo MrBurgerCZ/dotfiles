@@ -1,0 +1,8 @@
+timeout 200 'exec ~/scripts/backlight_save_restore.sh percent 33 900' resume 'exec ~/scripts/backlight_save_restore.sh restore'
+timeout 240 'exec ~/scripts/backlight_save_restore.sh set 0 3000' resume 'exec ~/scripts/backlight_save_restore.sh restore'
+timeout 243 'niri msg action power-off-monitors'
+timeout 260 'swaylock'
+
+before-sleep 'exec ~/scripts/backlight_save_restore.sh lock'
+after-resume 'exec ~/scripts/backlight_save_restore.sh restore'
+# before-sleep 'exec ~/scripts/sleep.sh'

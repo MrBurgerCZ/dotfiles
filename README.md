@@ -1,3 +1,5 @@
 my dotfiles :)
 
-*managed using [chezmoi](https://www.chezmoi.io/)*
+they are far from perfect and optimal, but it works.
+
+*managed with [chezmoi](https://www.chezmoi.io/)*

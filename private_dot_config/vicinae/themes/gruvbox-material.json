@@ -1,0 +1,18 @@
+{
+	"version": "1.0.0",
+	"appearance": "dark",
+	"name": "Gruvbox Material",
+	"description": "Gruvbox Material",
+	"palette": {
+	  "background": "#141617",
+	  "foreground": "#ddc7a1",
+	  "blue": "#7daea3",
+	  "green": "#a9b665",
+	  "magenta": "#d3869b",
+	  "orange": "#e78a4e",
+	  "purple": "#d3869b",
+	  "red": "#ea6962",
+	  "yellow": "#d8a657",
+	  "cyan": "#89b482"
+	}
+}
