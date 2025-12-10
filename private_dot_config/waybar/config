@@ -4,12 +4,13 @@
   // "width": 1280, // Waybar width
   // Choose the order of the modules
   "modules-left": [
-    "group/temp",
+    "temperature",
     "cpu",
     "memory",
     "battery",
     "battery#bat1",
-    "power-profiles-daemon"
+    "power-profiles-daemon",
+    "custom/fan"
     // "group/phone",
     // "custom/right-end"
     // "custom/music"
@@ -68,9 +69,15 @@
     // "thermal-zone": 2,
     // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     "tooltip": false,
-    "critical-threshold": 80,
+    "critical-threshold": 85,
     // "format-critical": "{temperatureC}°C {icon}",
     "on-click": "kitty btop",
+    "states": {
+      "critical": 85,
+      "high": 80,
+      "medium": 75,
+      "low": 0
+    },
     "format": "{icon} {temperatureC}°C",
     "format-icons": [
       "",

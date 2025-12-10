@@ -270,6 +270,7 @@ window-rule {
     match title="Code"
     match title="Blender"
     match title="Floorp"
+    match title="Discord"
 
     open-maximized true
 }
@@ -408,12 +409,12 @@ binds {
     Ctrl+XF86AudioLowerVolume   { spawn-sh "bash ~/scripts/fan_speed.sh down"; }
     Ctrl+XF86AudioMute          { spawn-sh "bash ~/scripts/fan_speed.sh auto"; }
     XF86AudioMicMute            allow-when-locked=true { spawn "swayosd-client" "--input-volume" "mute-toggle"; }
-    XF86MonBrightnessUp         allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2"; }
-    XF86MonBrightnessDown       allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "2"; }
+    XF86MonBrightnessUp         allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2" "-q"; }
+    XF86MonBrightnessDown       allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "2" "-q"; }
     Alt+XF86MonBrightnessUp     allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2" "-q"; }
     Alt+XF86MonBrightnessDown   allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "2" "-q"; }
-    Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "10"; }
-    Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "10"; }
+    Shift+XF86MonBrightnessUp   allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "10" "-q"; }
+    Shift+XF86MonBrightnessDown allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "10" "-q"; }
     Ctrl+XF86MonBrightnessUp    allow-when-locked=true { spawn "sudo" "brillo" "-u" "300000" "-S" "100"; }
     Ctrl+XF86MonBrightnessDown  allow-when-locked=true { spawn "sudo" "brillo" "-u" "300000" "-S" "0"; }
 

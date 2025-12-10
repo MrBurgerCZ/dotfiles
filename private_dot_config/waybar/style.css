@@ -73,6 +73,11 @@
   margin-left: 1rem;
 }
 
+#temperature.medium {
+  background-color: @yellow;
+  color: @bg_dim;
+}
+
 #temperature.high {
   color: @bg_dim;
   background-color: @orange;
@@ -176,6 +181,11 @@
 #custom-phone_network {
   padding-left: 0.7rem;
   padding-right: 0;
+}
+
+#custom-fan {
+  border-radius: 12px;
+  margin-left: 1rem;
 }
 
 #window {
