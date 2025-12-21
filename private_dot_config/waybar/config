@@ -446,7 +446,7 @@
     "tooltip": false,
     "format-alt": "{:%d/%m/%Y}",
     "format": "{:%H:%M}",
-    "on-click-middle": "sh $HOME/.config/rofi/bin/powermenu &",
+    "on-click-middle": "wlogout",
     "on-click-right": "swaync-client -t -sw"
   },
   "custom/lid-led": {
