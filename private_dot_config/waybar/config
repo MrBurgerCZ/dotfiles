@@ -224,6 +224,7 @@
     "exec": "~/scripts/music.sh",
     "return-type": "json",
     "on-click": "playerctl play-pause",
+    "on-click-middle": "playerctl stop",
     "max-length": 50,
     "on-scroll-up": "playerctl previous",
     "on-scroll-down": "playerctl next"

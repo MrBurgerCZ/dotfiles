@@ -233,6 +233,7 @@ recent-windows {
 // Add lines like this to spawn processes at startup.
 // spawn-at-startup "xwayland-satellite" ":42"
 spawn-at-startup "waybar"
+spawn-sh-at-startup "bongocat -w -c ~/.config/bongocat/bongocat.conf"
 spawn-at-startup "swaybg" "-i" "/home/burger/Pictures/japanese-castle-pixel-art_7680x4320-edit.jpg"
 spawn-at-startup "swayidle"
 spawn-at-startup "swayosd-server"
@@ -422,6 +423,8 @@ binds {
     Ctrl+XF86MonBrightnessUp    allow-when-locked=true { spawn "sudo" "brillo" "-u" "300000" "-S" "100"; }
     Ctrl+XF86MonBrightnessDown  allow-when-locked=true { spawn "sudo" "brillo" "-u" "300000" "-S" "0"; }
 
+    // Special keys
+    XF86PowerOff { spawn-sh "~/scripts/sleep.sh"; }
     XF86Display { power-off-monitors; }
     Ctrl+XF86Display { spawn "wdisplays"; }
     Ctrl+XF86WLAN { spawn "nm-connection-editor"; }
