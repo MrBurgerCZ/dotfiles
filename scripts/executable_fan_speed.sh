@@ -20,8 +20,7 @@ get_current_speed() {
 update_led() {
     if [[ "$1" == "auto" ]]; then
         swayosd-client --custom-progress 0
-    fi
-    if [[ "$1" == "disengaged" ]]; then
+    elif [[ "$1" == "disengaged" ]]; then
         swayosd-client --custom-progress 1
     fi
 }

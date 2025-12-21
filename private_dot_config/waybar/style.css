@@ -17,6 +17,8 @@
 #custom-left-end,
 #clock,
 #battery,
+#custom-bat0,
+#custom-bat1,
 #cpu,
 #memory,
 #disk,
@@ -120,7 +122,9 @@
   background-color: @red;
 }
 
-#battery {
+#battery,
+#custom-bat0,
+#custom-bat1 {
   color: @green;
   border-radius: 0;
 }
@@ -199,6 +203,10 @@
 #custom-music {
   border-radius: 12px;
   margin-left: 1rem;
+}
+
+#custom-music.Paused {
+    font-style: italic;
 }
 
 #mpd{
@@ -339,7 +347,6 @@
 #custom-bootwindows {
   color: @blue;
   padding-left: 10px;
-  border-radius: 12px 0px 0px 12px;
 }
 
 #custom-bootmacos {
@@ -356,7 +363,6 @@
 
 #custom-shutdown {
   color: @red;
-  border-radius: 0px 12px 12px 0px;
   padding-right: 8px;
 }
 

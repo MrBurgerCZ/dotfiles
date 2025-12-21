@@ -8,12 +8,15 @@
     "cpu",
     "memory",
     "battery",
+    "custom/bat0",
     "battery#bat1",
+    "custom/bat1",
     "power-profiles-daemon",
-    "custom/fan"
+    // "mpris"
+    // "custom/fan"
     // "group/phone",
     // "custom/right-end"
-    // "custom/music"
+    "custom/music"
   ],
   "modules-center": [
     "niri/window"
@@ -152,6 +155,11 @@
       ""
     ]
   },
+  "custom/bat0": {
+    "exec": "$HOME/scripts/battery.sh 0",
+    "interval": 1,
+    "format": "{}"
+  },
   "battery#bat1": {
     "bat": "BAT1",
     "states": {
@@ -171,6 +179,11 @@
       "",
       ""
     ]
+  },
+  "custom/bat1": {
+    "exec": "$HOME/scripts/battery.sh 1",
+    "interval": 1,
+    "format": "{}"
   },
   "power-profiles-daemon": {
     "format": "{icon}",
@@ -208,13 +221,17 @@
   "custom/music": {
     "format": "<span font_size='12000'> {}</span>",
     "escape": true,
-    "interval": 5,
-    "tooltip": false,
-    "exec": "playerctl metadata --format='{{ title }}' | sed 's/\\(.*\\) - .*/\\1/'",
+    "exec": "~/scripts/music.sh",
+    "return-type": "json",
     "on-click": "playerctl play-pause",
     "max-length": 50,
     "on-scroll-up": "playerctl previous",
     "on-scroll-down": "playerctl next"
+  },
+  "custom/uhmusic": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "waybar-module-music"
   },
   // "wlr/taskbar": {
   //   "format": "{icon}",
@@ -229,6 +246,7 @@
     "format": "{}",
     "rewrite": {
       "(.*) — Mozilla Firefox": "$1",
+      "(.*) — Mozilla Firefox Private Browsing": "$1 — 󰗹",
       "(.*) — Ablaze Floorp": "$1",
       "(.*) — Ablaze Floorp Private Browsing": "$1 — 󰗹",
       "(.*) — Zen Browser": "$1",
@@ -396,7 +414,7 @@
     // "interface": "wlp2*", // (Optional) To force the use of this interface
     "format-wifi": " {essid} ({signalStrength}%)",
     "format-ethernet": " {ifname}",
-    "tooltip-format": "{ifname} via {gwaddr} ",
+    "tooltip-format": "{ifname} via {gwaddr}",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "⚠ Disconnected",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
@@ -412,13 +430,13 @@
     },
     "modules": [
       "clock", // First element is the "group leader" and won't ever be hidden
-      "custom/right-end",
+      // "custom/right-end",
       "custom/bootwindows",
       "custom/bootmacos",
       "custom/sleep",
       "custom/reboot",
-      "custom/shutdown",
-      "custom/left-end"
+      "custom/shutdown"
+      // "custom/left-end"
     ]
   },
   "clock": {
