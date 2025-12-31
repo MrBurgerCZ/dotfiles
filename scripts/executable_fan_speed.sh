@@ -16,18 +16,36 @@ get_current_speed() {
     grep -m1 "speed" "$FAN_FILE" | awk '{print $2}'
 }
 
-# Funkce pro ovladani LEDky
-update_led() {
-    if [[ "$1" == "auto" ]]; then
-        swayosd-client --custom-progress 0
-    elif [[ "$1" == "disengaged" ]]; then
-        swayosd-client --custom-progress 1
+update_osd() {
+    local cmd=""
+    case "$1" in
+        auto)
+            cmd="swayosd-client --custom-progress 0"
+            ;;
+        disengaged)
+            cmd="swayosd-client --custom-progress 1"
+            ;;
+        *)
+            if [[ "$1" =~ ^[0-7]$ ]]; then
+                cmd="swayosd-client --custom-segmented-progress $1:7"
+            fi
+            ;;
+    esac
+
+    if [[ -n "$cmd" ]]; then
+        # Pokud bezime pres sudo, zkusime to pustit jako puvodni uzivatel, 
+        # jinak by swayosd nemusel najit socket.
+        if [[ -n "$SUDO_USER" ]]; then
+            sudo -u "$SUDO_USER" $cmd &
+        else
+            $cmd &
+        fi
     fi
 }
 
 set_level() {
     echo "level $1" | tee $FAN_FILE > /dev/null
-    update_led "$1"
+    update_osd "$1"
 }
 
 current=$(get_current_level)
@@ -61,8 +79,6 @@ case "$1" in
         ;;
     show|*)
         speed=$(get_current_speed)
-        # Pro jistotu syncneme LEDku i pri zobrazeni stavu
-        update_led "$current"
         echo "${speed} RPM ${current}"
         ;;
 esac

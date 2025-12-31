@@ -441,10 +441,11 @@
     ]
   },
   "clock": {
+    "interval": 1,
     "timezone": "Europe/Prague",
     // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "tooltip": false,
-    "format-alt": "{:%d/%m/%Y}",
+    "format-alt": "{:%H:%M:%S %Y-%m-%d}",
     "format": "{:%H:%M}",
     "on-click-middle": "wlogout",
     "on-click-right": "swaync-client -t -sw"

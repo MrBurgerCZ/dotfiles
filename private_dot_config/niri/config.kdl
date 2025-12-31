@@ -399,6 +399,7 @@ binds {
     // Alt+Tab repeat=false { spawn "pkill" "-USR1" "niriswitcher"; }
     // Alt+Tab { spawn-sh "vicinae deeplink vicinae://extensions/vicinae/wm/switch-windows"; }
     Mod+Period { spawn-sh "vicinae deeplink vicinae://extensions/vicinae/core/search-emojis"; }
+    Mod+V { spawn-sh "vicinae deeplink vicinae://extensions/vicinae/clipboard/history"; }
     Mod+E { spawn "kitty" "yazi"; }
     Mod+T { spawn "kitty"; }
     Super+L { spawn "swaylock"; }
@@ -424,7 +425,7 @@ binds {
     Ctrl+XF86MonBrightnessDown  allow-when-locked=true { spawn "sudo" "brillo" "-u" "300000" "-S" "0"; }
 
     // Special keys
-    XF86PowerOff { spawn-sh "~/scripts/sleep.sh"; }
+    XF86PowerOff allow-when-locked=true { spawn-sh "~/scripts/sleep.sh"; }
     XF86Display { power-off-monitors; }
     Ctrl+XF86Display { spawn "wdisplays"; }
     Ctrl+XF86WLAN { spawn "nm-connection-editor"; }
