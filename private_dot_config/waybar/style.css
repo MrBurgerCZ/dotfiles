@@ -42,7 +42,7 @@
 #mode,
 #idle_inhibitor,
 #scratchpad,
-#power-profiles-daemon,
+#custom-power_profile,
 #keyboard-state,
 #bluetooth,
 #language,
@@ -143,21 +143,25 @@
   background-color: @red;
 }
 
-#power-profiles-daemon {
+#custom-power_profile {
   color: @purple;
   border-radius: 0px 12px 12px 0px;
 }
 
-#power-profiles-daemon.performance {
+#custom-power_profile.performance {
   color: @red;
   background-color: @bg_diff_red;
 }
 
-#power-profiles-daemon.balanced {
+#custom-power_profile.balanced {
   color: @orange;
 }
 
-#power-profiles-daemon.power-saver {
+#custom-power_profile.silent {
+  color: @yellow;
+}
+
+#custom-power_profile.power-saver {
   color: @aqua;
 }
 

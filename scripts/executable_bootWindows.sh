@@ -1,3 +1,9 @@
 #!/bin/bash
-sudo efibootmgr --bootnext 0000
+
+# run as root
+if [[ $EUID -ne 0 ]]; then
+   exec sudo "$0" "$@"
+fi
+
+sudo efibootmgr --bootnext 0001
 sudo reboot 0

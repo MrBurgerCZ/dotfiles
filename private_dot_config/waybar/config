@@ -11,7 +11,8 @@
     "custom/bat0",
     "battery#bat1",
     "custom/bat1",
-    "power-profiles-daemon",
+    // "power-profiles-daemon",
+    "custom/power_profile",
     // "mpris"
     // "custom/fan"
     // "group/phone",
@@ -194,6 +195,21 @@
       "performance": "",
       "balanced": "",
       "power-saver": ""
+    }
+  },
+  "custom/power_profile": {
+    "format": "{icon}",
+    "return-type": "json",
+    "exec": "/home/burger/scripts/power_profile.sh",
+    "on-click": "/home/burger/scripts/power_profile.sh next && pkill -RTMIN+8 waybar",
+    "on-click-right": "/home/burger/scripts/power_profile.sh prev && pkill -RTMIN+8 waybar",
+    "signal": 8,
+    "interval": 30,
+    "format-icons": {
+        "performance": "",
+        "balanced": "",
+        "silent": "",
+        "power-saver": ""
     }
   },
   "group/phone": {

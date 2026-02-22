@@ -32,7 +32,7 @@ case "$1" in
     fi
     ;;
   lock)
-    swaylock &
+    hyprlock &
     wait_for_brillo
     safe_write_state &
     sudo brillo -u 300000 -S 0

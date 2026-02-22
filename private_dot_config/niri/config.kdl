@@ -233,9 +233,8 @@ recent-windows {
 // Add lines like this to spawn processes at startup.
 // spawn-at-startup "xwayland-satellite" ":42"
 spawn-at-startup "waybar"
-spawn-sh-at-startup "bongocat -w -c ~/.config/bongocat/bongocat.conf"
 spawn-at-startup "swaybg" "-i" "/home/burger/Pictures/japanese-castle-pixel-art_7680x4320-edit.jpg"
-spawn-at-startup "swayidle"
+spawn-at-startup "hypridle"
 spawn-at-startup "swayosd-server"
 spawn-at-startup "gammastep" "-l" "50.724911:15.169400" "-t" "6500:2500"
 spawn-at-startup "plasma-polkit-agent"
@@ -243,6 +242,7 @@ spawn-at-startup "udiskie" "-t"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-sh-at-startup "vicinae server"
 spawn-sh-at-startup "arch-update --tray"
+spawn-sh-at-startup "sleep 5 && bongocat -w -c ~/.config/bongocat/bongocat.conf"
 // spawn-at-startup "ntfs-3g" "/dev/nvme0n1p3" "/mnt/Windows11/"
 
 switch-events {
@@ -402,7 +402,7 @@ binds {
     Mod+V { spawn-sh "vicinae deeplink vicinae://extensions/vicinae/clipboard/history"; }
     Mod+E { spawn "kitty" "yazi"; }
     Mod+T { spawn "kitty"; }
-    Super+L { spawn "swaylock"; }
+    Super+L { spawn "hyprlock"; }
     Ctrl+Shift+Escape { spawn "kitty" "btop"; }
     Ctrl+Alt+Delete { spawn "wlogout"; }
     Mod+A { spawn "bash" "-c" "~/scripts/toggle_caps_esc_swap.sh"; }
