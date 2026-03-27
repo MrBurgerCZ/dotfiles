@@ -363,7 +363,9 @@
     "spacing": 10
   },
   "niri/language": {
-    "format": "{short}"
+    "format": "{short}<span font_size='6000'> {variant}</span>",
+    "tooltip": true,
+    "tooltip-format": "{variant}"
     // "format-us": "EN"
     // "format-cs": "CZ"
   },
@@ -449,10 +451,10 @@
       "clock", // First element is the "group leader" and won't ever be hidden
       // "custom/right-end",
       "custom/bootwindows",
-      "custom/bootmacos",
-      "custom/sleep",
-      "custom/reboot",
-      "custom/shutdown"
+      // "custom/bootmacos",
+      "custom/sleep"
+      // "custom/reboot",
+      // "custom/shutdown"
       // "custom/left-end"
     ]
   },
@@ -466,22 +468,10 @@
     "on-click-middle": "wlogout",
     "on-click-right": "swaync-client -t -sw"
   },
-  "custom/lid-led": {
-    "tooltip": false,
-    "format": "󰤄",
-    "on-click": "sh $HOME/scripts/lidLed.sh",
-    "escape": true
-  },
-  "custom/power-led": {
-    "tooltip": false,
-    "format": "󰤄",
-    "on-click": "sh $HOME/scripts/powerLed.sh",
-    "escape": true
-  },
   "custom/bootwindows": {
     "tooltip": false,
     "format": "",
-    "on-click": "kitty sh $HOME/scripts/bootWindows.sh",
+    "on-click": "sh $HOME/scripts/bootWindows.sh",
     "escape": true
   },
   "custom/bootmacos": {

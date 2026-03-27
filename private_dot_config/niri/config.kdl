@@ -17,7 +17,7 @@ input {
 
     keyboard {
         xkb {
-            layout "us,cz(qwerty)"
+            layout "cz(coder),us,cz(qwerty)"
             options "grp:win_space_toggle"
         }
     }
@@ -402,7 +402,7 @@ binds {
     Mod+V { spawn-sh "vicinae deeplink vicinae://extensions/vicinae/clipboard/history"; }
     Mod+E { spawn "kitty" "yazi"; }
     Mod+T { spawn "kitty"; }
-    Super+L { spawn "hyprlock"; }
+    Super+Semicolon { spawn "swaylock"; }
     Ctrl+Shift+Escape { spawn "kitty" "btop"; }
     Ctrl+Alt+Delete { spawn "wlogout"; }
     Mod+A { spawn "bash" "-c" "~/scripts/toggle_caps_esc_swap.sh"; }
@@ -448,6 +448,16 @@ binds {
     Mod+Ctrl+Down  { move-window-down; }
     Mod+Ctrl+Up    { move-window-up; }
     Mod+Ctrl+Right { move-column-right; }
+
+    Mod+H  { focus-column-left; }
+    Mod+J  { focus-window-down; }
+    Mod+K    { focus-window-up; }
+    Mod+L { focus-column-right; }
+
+    Mod+Ctrl+H  { move-column-left; }
+    Mod+Ctrl+J  { move-window-down; }
+    Mod+Ctrl+K    { move-window-up; }
+    Mod+Ctrl+L { move-column-right; }
 
     // Tabbing
     Mod+W { toggle-column-tabbed-display; }
