@@ -197,6 +197,22 @@ layout {
     }
 }
 
+blur {
+    // off
+    passes 3
+    offset 3
+    noise 0.05
+    saturation 1.5
+}
+
+layer-rule {
+    match namespace="vicinae"
+
+    background-effect {
+	xray false
+    }
+}
+
 recent-windows {
     // off
     debounce-ms 750
@@ -236,13 +252,15 @@ spawn-at-startup "waybar"
 spawn-at-startup "swaybg" "-i" "/home/burger/Pictures/japanese-castle-pixel-art_7680x4320-edit.jpg"
 spawn-at-startup "hypridle"
 spawn-at-startup "swayosd-server"
-spawn-at-startup "gammastep" "-l" "50.724911:15.169400" "-t" "6500:2500"
+// spawn-at-startup "gammastep" "-l" "50.724911:15.169400" "-t" "6500:2500"
+spawn-at-startup "sunsetr"
 spawn-at-startup "plasma-polkit-agent"
 spawn-at-startup "udiskie" "-t"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-sh-at-startup "vicinae server"
 spawn-sh-at-startup "arch-update --tray"
 spawn-sh-at-startup "sleep 5 && bongocat -w -c ~/.config/bongocat/bongocat.conf"
+spawn-sh-at-startup "ie-r"
 // spawn-at-startup "ntfs-3g" "/dev/nvme0n1p3" "/mnt/Windows11/"
 
 switch-events {
@@ -347,6 +365,41 @@ window-rule {
     }
 }
 
+window-rule {
+    match is-floating=true
+    background-effect {
+        xray false
+    }
+}
+
+// KDE Connect pointer
+window-rule {
+  match app-id=r"org.kde.kdeconnect.daemon" // ID of presentation pointer overlay
+  open-floating true
+  open-fullscreen false
+  default-floating-position x=0 y=0 relative-to="top-left"
+
+  // Adjust these to your monitor's resolution
+  min-width 1920
+  min-height 1080
+
+  // Optionally customize opacity of pointer
+  // opacity 1.0
+
+  tiled-state true
+
+  focus-ring {
+    off
+  }
+  border {
+    off
+  }
+  shadow {
+    off
+  }
+  draw-border-with-background false
+}
+
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
@@ -406,6 +459,8 @@ binds {
     Ctrl+Shift+Escape { spawn "kitty" "btop"; }
     Ctrl+Alt+Delete { spawn "wlogout"; }
     Mod+A { spawn "bash" "-c" "~/scripts/toggle_caps_esc_swap.sh"; }
+    Ctrl+Mod+C { spawn-sh "killall -SIGUSR1 ie-r"; }
+    Alt+Mod+C { spawn-sh "killall -SIGUSR2 ie-r"; }
 
     // Function row
     XF86AudioRaiseVolume        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
@@ -414,7 +469,7 @@ binds {
     Ctrl+XF86AudioRaiseVolume   { spawn-sh "bash ~/scripts/fan_speed.sh up"; }
     Ctrl+XF86AudioLowerVolume   { spawn-sh "bash ~/scripts/fan_speed.sh down"; }
     Ctrl+XF86AudioMute          { spawn-sh "bash ~/scripts/fan_speed.sh auto"; }
-    XF86AudioMicMute            allow-when-locked=true { spawn "swayosd-client" "--input-volume" "mute-toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
     XF86MonBrightnessUp         allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2" "-q"; }
     XF86MonBrightnessDown       allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-U" "2" "-q"; }
     Alt+XF86MonBrightnessUp     allow-when-locked=true { spawn "sudo" "brillo" "-u" "150000" "-A" "2" "-q"; }

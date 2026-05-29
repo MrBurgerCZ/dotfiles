@@ -11,7 +11,9 @@ wait_for_brillo() {
 
 safe_write_state() {
   if [ ! -f "$STATE_FILE" ]; then
-    sudo brillo -r > "$STATE_FILE"
+    sudo brillo -r > "$STATE_FILE.tmp"
+    mv -n "$STATE_FILE.tmp" "$STATE_FILE" 2>/dev/null
+    rm -f "$STATE_FILE.tmp"
   fi
 }
 
@@ -24,19 +26,19 @@ case "$1" in
     sudo brillo -u "$TIME"000 -S "$TARGET"
     ;;
   restore)
-    if [ -f "$STATE_FILE" ]; then
-      VALUE=$(cat "$STATE_FILE")
+    MY_STATE="/tmp/.backlight_state.restore.$$"
+    if mv "$STATE_FILE" "$MY_STATE" 2>/dev/null; then
+      VALUE=$(cat "$MY_STATE")
       wait_for_brillo
       sudo brillo -u ${2:-900}000 -S "$VALUE" -r
-      rm -f "$STATE_FILE"
+      rm -f "$MY_STATE"
     fi
     ;;
   lock)
     hyprlock &
     wait_for_brillo
-    safe_write_state &
+    safe_write_state
     sudo brillo -u 300000 -S 0
-    # brightnessctl s 0
     ;;
   percent)
     PERCENT=${2:-100}
