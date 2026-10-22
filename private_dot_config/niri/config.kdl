@@ -32,6 +32,7 @@ input {
         // dwt
         // dwtp
         natural-scroll
+        scroll-factor 1
         // accel-speed 0.2
         // accel-profile "flat"
         // scroll-method "two-finger"
@@ -258,16 +259,17 @@ spawn-at-startup "hypridle"
 // spawn-at-startup "sunsetr"
 // spawn-at-startup "plasma-polkit-agent"
 spawn-at-startup "udiskie" "-t"
-// spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
+spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-sh-at-startup "vicinae server"
 spawn-sh-at-startup "arch-update --tray"
 // spawn-sh-at-startup "sleep 5 && bongocat -w -c ~/.config/bongocat/bongocat.conf"
 spawn-sh-at-startup "ie-r"
 // spawn-at-startup "ntfs-3g" "/dev/nvme0n1p3" "/mnt/Windows11/"
+spawn-at-startup "niri-sidebar" "listen"
 
 switch-events {
-    lid-close { spawn "~/scripts/backlight_save_restore.sh" "set" "0" "300"; }
-    lid-open { spawn "~/scripts/backlight_save_restore.sh" "restore" "2000"; }
+    lid-close { spawn "~/scripts/backlight_save_restore.sh" "set" "0" "500"; }
+    lid-open { spawn "~/scripts/backlight_save_restore.sh" "restore" "500"; }
 }
 
 debug {
@@ -304,6 +306,7 @@ window-rule {
     match title="Floorp"
     match title="Discord"
     match title="vesktop"
+    match title="LibreWolf"
 
     open-maximized true
 }
@@ -470,6 +473,17 @@ cursor {
 }
 
 binds {
+    // Toggle the focused window into/out of the sidebar
+    Mod+S { spawn-sh "niri-sidebar toggle-window"; }
+
+    // Toggle sidebar visibility (hide/show)
+    Mod+Shift+S { spawn-sh "niri-sidebar toggle-visibility"; }
+
+    // Flip the order of the sidebar
+    Mod+Ctrl+S { spawn-sh "niri-sidebar flip"; }
+
+    // Force reorder (useful if something gets misaligned manually)
+    Mod+Alt+R { spawn-sh "niri-sidebar reorder"; }
 
     Mod+Ctrl+O { set-dynamic-cast-window; }
     Mod+Shift+O { set-dynamic-cast-monitor; }
@@ -487,7 +501,7 @@ binds {
     Mod+V { spawn-sh "vicinae deeplink vicinae://extensions/vicinae/clipboard/history"; }
     Mod+E { spawn "nautilus"; }
     Mod+T { spawn "kitty"; }
-    Super+Semicolon { spawn-sh "noctalia msg session lock"; }
+    Super+Semicolon { spawn "loginctl" "lock-session"; }
     Ctrl+Shift+Escape { spawn "kitty" "btop"; }
     Ctrl+Alt+Delete { spawn "wlogout"; }
     Mod+A { spawn "bash" "-c" "~/scripts/toggle_caps_esc_swap.sh"; }
