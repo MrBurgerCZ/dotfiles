@@ -8,6 +8,8 @@ hotkey-overlay {
     skip-at-startup
 }
 
+include "noctalia.kdl"
+
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
@@ -94,7 +96,7 @@ output "eDP-1" {
 }
 
 output "HDMI-A-2" {
-    mode "2560x1440@60"
+    mode "1920x1080@60.000"
     scale 1
 }
 
@@ -248,18 +250,18 @@ recent-windows {
 
 // Add lines like this to spawn processes at startup.
 // spawn-at-startup "xwayland-satellite" ":42"
-spawn-at-startup "waybar"
-spawn-at-startup "swaybg" "-i" "/home/burger/Pictures/japanese-castle-pixel-art_7680x4320-edit.jpg"
+spawn-at-startup "noctalia"
+// spawn-at-startup "swaybg" "-i" "/home/burger/Pictures/japanese-castle-pixel-art_7680x4320-edit.jpg"
 spawn-at-startup "hypridle"
-spawn-at-startup "swayosd-server"
+// spawn-at-startup "swayosd-server"
 // spawn-at-startup "gammastep" "-l" "50.724911:15.169400" "-t" "6500:2500"
-spawn-at-startup "sunsetr"
-spawn-at-startup "plasma-polkit-agent"
+// spawn-at-startup "sunsetr"
+// spawn-at-startup "plasma-polkit-agent"
 spawn-at-startup "udiskie" "-t"
-spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
+// spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-sh-at-startup "vicinae server"
 spawn-sh-at-startup "arch-update --tray"
-spawn-sh-at-startup "sleep 5 && bongocat -w -c ~/.config/bongocat/bongocat.conf"
+// spawn-sh-at-startup "sleep 5 && bongocat -w -c ~/.config/bongocat/bongocat.conf"
 spawn-sh-at-startup "ie-r"
 // spawn-at-startup "ntfs-3g" "/dev/nvme0n1p3" "/mnt/Windows11/"
 
@@ -268,11 +270,19 @@ switch-events {
     lid-open { spawn "~/scripts/backlight_save_restore.sh" "restore" "2000"; }
 }
 
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
 
 // Display for xwayland-satellite
 // environment {
 //     DISPLAY ":42"
 // }
+
+environment {
+  QT_QPA_PLATFORMTHEME "qt6ct"
+}
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -400,6 +410,28 @@ window-rule {
   draw-border-with-background false
 }
 
+window-rule {
+    match app-id="at.yrlf.wl_mirror"
+    open-on-output "HDMI-A-2"
+}
+
+layer-rule {
+  match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+  background-effect {
+    xray false
+    // blur false
+  }
+}
+
+/* Enable blur on noctalia's window switcher and disable xray. */
+layer-rule {
+    match namespace="noctalia-window-switcher"
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
@@ -453,9 +485,9 @@ binds {
     // Alt+Tab { spawn-sh "vicinae deeplink vicinae://extensions/vicinae/wm/switch-windows"; }
     Mod+Period { spawn-sh "vicinae deeplink vicinae://extensions/vicinae/core/search-emojis"; }
     Mod+V { spawn-sh "vicinae deeplink vicinae://extensions/vicinae/clipboard/history"; }
-    Mod+E { spawn "kitty" "yazi"; }
+    Mod+E { spawn "nautilus"; }
     Mod+T { spawn "kitty"; }
-    Super+Semicolon { spawn "swaylock"; }
+    Super+Semicolon { spawn-sh "noctalia msg session lock"; }
     Ctrl+Shift+Escape { spawn "kitty" "btop"; }
     Ctrl+Alt+Delete { spawn "wlogout"; }
     Mod+A { spawn "bash" "-c" "~/scripts/toggle_caps_esc_swap.sh"; }
@@ -463,9 +495,9 @@ binds {
     Alt+Mod+C { spawn-sh "killall -SIGUSR2 ie-r"; }
 
     // Function row
-    XF86AudioRaiseVolume        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "raise"; }
-    XF86AudioLowerVolume        allow-when-locked=true { spawn "swayosd-client" "--output-volume" "lower"; }
-    XF86AudioMute               allow-when-locked=true { spawn "swayosd-client" "--output-volume" "mute-toggle"; }
+    XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
     Ctrl+XF86AudioRaiseVolume   { spawn-sh "bash ~/scripts/fan_speed.sh up"; }
     Ctrl+XF86AudioLowerVolume   { spawn-sh "bash ~/scripts/fan_speed.sh down"; }
     Ctrl+XF86AudioMute          { spawn-sh "bash ~/scripts/fan_speed.sh auto"; }
@@ -483,6 +515,7 @@ binds {
     XF86PowerOff allow-when-locked=true { spawn-sh "~/scripts/sleep.sh"; }
     XF86Display { power-off-monitors; }
     Ctrl+XF86Display { spawn "wdisplays"; }
+    Shift+XF86Display { spawn-sh "noctalia msg panel-toggle elijaharch/wl-screen-mirror:controls"; }
     Ctrl+XF86WLAN { spawn "nm-connection-editor"; }
     Ctrl+Shift+XF86Favorites { spawn "systemctl" "start" "blackout"; }
     //XF86Bluetooth { spawn "blueman-manager"; }

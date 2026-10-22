@@ -33,6 +33,10 @@ case "$1" in
       sudo brillo -u ${2:-900}000 -S "$VALUE" -r
       rm -f "$MY_STATE"
     fi
+    
+    if [ "$3" = "fingerprint" ]; then
+      ~/scripts/fingerprint_after_sleep.sh
+    fi
     ;;
   lock)
     hyprlock &
